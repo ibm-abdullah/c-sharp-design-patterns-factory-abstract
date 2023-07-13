@@ -39,20 +39,8 @@ namespace Adding_a_Factory_Provider
             order.LineItems.Add(new Item("CONSULTING", "Building a website", 100m), 1);
             #endregion
 
-            IPurchaseProviderFactory purchaseProviderFactory;
-
-            if(order.Sender.Country == "Sweden")
-            {
-                purchaseProviderFactory = new SwedenPurchaseProviderFactory();
-            }
-            else if (order.Sender.Country == "Australia")
-            {
-                purchaseProviderFactory = new AustraliaPurchaseProviderFactory();
-            }
-            else
-            {
-                throw new NotSupportedException("Sender country has no purchase provider");
-            }
+            PurchaseFactoryProvider factoryProvider = new PurchaseFactoryProvider();
+            IPurchaseProviderFactory purchaseProviderFactory = factoryProvider.CreateFactoryFor(order.Recipient.Country);
 
             var cart = new ShoppingCart(order, purchaseProviderFactory);
 

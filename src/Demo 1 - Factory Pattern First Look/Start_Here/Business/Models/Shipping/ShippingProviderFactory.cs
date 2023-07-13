@@ -1,14 +1,14 @@
-﻿using System;
+using Factory_Pattern_First_Look.Business.Models.Commerce;
+using Factory_Pattern_First_Look.Business.Models.Shipping;
+using System;
 
-namespace Factory_Method_Pattern.Business.Models.Shipping
+namespace Factory_Pattern_First_Look.Business
 {
     public class ShippingProviderFactory
     {
         public static ShippingProvider CreateShippingProvider(string country)
         {
             ShippingProvider shippingProvider;
-
-            #region Create Shipping Provider
 
             if (country == "Australia")
             {
@@ -73,7 +73,6 @@ namespace Factory_Method_Pattern.Business.Models.Shipping
             {
                 throw new NotSupportedException("No shipping provider found for origin country");
             }
-            #endregion
 
             return shippingProvider;
         }
